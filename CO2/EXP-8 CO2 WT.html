@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Digital Clock & Examination Countdown Timer</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+background:linear-gradient(135deg,#F8F1E7,#F3E5D8,#EFE4D7,#FAF6F0);
+
+}
+
+.container{
+
+width:500px;
+background:white;
+padding:35px;
+border-radius:20px;
+box-shadow:0px 10px 25px rgba(0,0,0,0.2);
+text-align:center;
+
+}
+
+h1{
+
+color:#7A5C4D;
+margin-bottom:25px;
+
+}
+
+.clock{
+
+font-size:42px;
+font-weight:bold;
+color:#8B5E3C;
+background:#FFF8F2;
+padding:20px;
+border-radius:12px;
+margin-bottom:30px;
+
+}
+
+label{
+
+display:block;
+margin-bottom:10px;
+font-size:18px;
+font-weight:bold;
+color:#6B4F4F;
+
+}
+
+input{
+
+padding:12px;
+width:100%;
+border:2px solid #D8C3B5;
+border-radius:10px;
+font-size:16px;
+
+}
+
+button{
+
+margin-top:20px;
+padding:12px 25px;
+background:#B08968;
+color:white;
+border:none;
+border-radius:10px;
+font-size:17px;
+cursor:pointer;
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:#8B5E3C;
+
+}
+
+#countdown{
+
+margin-top:30px;
+padding:20px;
+background:#FFF8F2;
+border-left:6px solid #B08968;
+border-radius:10px;
+font-size:22px;
+font-weight:bold;
+color:#444;
+
+}
+
+.footer{
+
+margin-top:25px;
+color:#777;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🕒 Digital Clock & Examination Countdown</h1>
+
+<div id="clock" class="clock">
+
+00:00:00
+
+</div>
+
+<label>Select Examination Date & Time</label>
+
+<input type="datetime-local" id="examDate">
+
+<button onclick="startCountdown()">
+
+Start Countdown
+
+</button>
+
+<div id="countdown">
+
+Countdown will appear here.
+
+</div>
+
+<div class="footer">
+
+Web Technology Laboratory
+
+</div>
+
+</div>
+
+<script>
+
+function updateClock(){
+
+let now=new Date();
+
+let time=now.toLocaleTimeString();
+
+document.getElementById("clock").innerHTML=time;
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+let timer;
+
+function startCountdown(){
+
+clearInterval(timer);
+
+let examTime=new Date(document.getElementById("examDate").value).getTime();
+
+timer=setInterval(function(){
+
+let now=new Date().getTime();
+
+let distance=examTime-now;
+
+if(distance<=0){
+
+clearInterval(timer);
+
+document.getElementById("countdown").innerHTML="🎉 Examination Time Started!";
+
+return;
+
+}
+
+let days=Math.floor(distance/(1000*60*60*24));
+
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+
+let seconds=Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("countdown").innerHTML=
+
+"📅 "+days+" Days <br><br>⏰ "+hours+" Hours <br><br>⏱ "+minutes+" Minutes <br><br>⌛ "+seconds+" Seconds Remaining";
+
+},1000);
+
+}
+
+</script>
+
+</body>
+
+</html>

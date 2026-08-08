@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Responsive College Website</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:#f8f4ef;
+color:#333;
+}
+
+header{
+background:linear-gradient(to right,#8B5E3C,#B08968,#DDB892);
+color:white;
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+header h1{
+font-size:32px;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#FFE8D6;
+}
+
+.hero{
+background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200");
+background-size:cover;
+background-position:center;
+height:400px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+
+.hero h2{
+font-size:45px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:20px;
+}
+
+.container{
+padding:40px;
+}
+
+.section-title{
+text-align:center;
+font-size:32px;
+color:#8B5E3C;
+margin-bottom:30px;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0px 8px 20px rgba(0,0,0,0.15);
+transition:0.3s;
+text-align:center;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h3{
+color:#8B5E3C;
+margin-bottom:15px;
+}
+
+.card p{
+line-height:1.7;
+}
+
+.about{
+margin-top:50px;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0px 8px 20px rgba(0,0,0,0.15);
+}
+
+.about h2{
+color:#8B5E3C;
+margin-bottom:15px;
+}
+
+footer{
+margin-top:50px;
+background:#8B5E3C;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+text-align:center;
+}
+
+nav ul{
+flex-direction:column;
+margin-top:15px;
+}
+
+.hero h2{
+font-size:32px;
+}
+
+.hero p{
+font-size:17px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🎓 SIMATS College</h1>
+
+<nav>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#">About</a></li>
+
+<li><a href="#">Departments</a></li>
+
+<li><a href="#">Admissions</a></li>
+
+<li><a href="#">Contact</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div>
+
+<h2>Welcome to SIMATS</h2>
+
+<p>Empowering Students Through Knowledge, Innovation and Excellence</p>
+
+</div>
+
+</section>
+
+<div class="container">
+
+<h2 class="section-title">Our Departments</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>💻 Information Technology</h3>
+
+<p>Learn programming, web development, AI, cloud computing and data analytics.</p>
+
+</div>
+
+<div class="card">
+
+<h3>🖥 Computer Science</h3>
+
+<p>Build strong software engineering and problem-solving skills using modern technologies.</p>
+
+</div>
+
+<div class="card">
+
+<h3>🤖 Artificial Intelligence</h3>
+
+<p>Explore machine learning, deep learning and intelligent automation.</p>
+
+</div>
+
+<div class="card">
+
+<h3>📡 Electronics & Communication</h3>
+
+<p>Study communication systems, embedded systems and IoT technologies.</p>
+
+</div>
+
+</div>
+
+<div class="about">
+
+<h2>About Our College</h2>
+
+<p>
+
+Saveetha Institute of Medical and Technical Sciences (SIMATS) provides quality education with modern laboratories, experienced faculty, research opportunities, and excellent placement support. The college focuses on academic excellence, innovation, leadership, and overall student development.
+
+</p>
+
+</div>
+
+</div>
+
+<footer>
+
+<p>© 2026 SIMATS | Responsive College Website | Designed by Gayathri</p>
+
+</footer>
+
+</body>
+
+</html>
