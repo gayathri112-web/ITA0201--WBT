@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Registration Form</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#F8F1E7,#F3E5D8,#EFE4D7,#FAF6F0);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+width:450px;
+background:#FFFDFB;
+padding:35px;
+border-radius:20px;
+box-shadow:0px 12px 30px rgba(0,0,0,0.15);
+border:2px solid #E5D3C5;
+}
+
+h2{
+text-align:center;
+color:#7A5C4D;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:15px;
+margin-bottom:6px;
+font-weight:bold;
+color:#6B4F4F;
+}
+
+input,
+select{
+width:100%;
+padding:12px;
+border:2px solid #D8C3B5;
+border-radius:10px;
+background:#FAF6F2;
+font-size:15px;
+transition:.3s;
+}
+
+input:focus,
+select:focus{
+outline:none;
+border-color:#B08968;
+box-shadow:0 0 8px rgba(176,137,104,0.4);
+}
+
+button{
+width:100%;
+padding:13px;
+margin-top:25px;
+border:none;
+border-radius:10px;
+background:linear-gradient(to right,#B08968,#A47551);
+color:white;
+font-size:17px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.03);
+background:linear-gradient(to right,#9C6644,#7F5539);
+}
+
+#message{
+margin-top:18px;
+text-align:center;
+font-weight:bold;
+font-size:16px;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+color:#8A6F63;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🎓 Student Registration</h2>
+
+<form id="studentForm">
+
+<label>👤 Student Name</label>
+<input
+type="text"
+id="name"
+placeholder="Enter Student Name"
+required>
+
+<label>🆔 Register Number</label>
+<input
+type="text"
+id="regno"
+placeholder="Enter Register Number"
+required>
+
+<label>🏫 Department</label>
+
+<select id="department" required>
+
+<option value="">Select Department</option>
+<option>Information Technology</option>
+<option>Computer Science Engineering</option>
+<option>Artificial Intelligence</option>
+<option>Electronics & Communication</option>
+
+</select>
+
+<label>📧 Email</label>
+<input
+type="email"
+id="email"
+placeholder="example@gmail.com"
+required>
+
+<label>📱 Mobile Number</label>
+<input
+type="tel"
+id="mobile"
+placeholder="Enter 10-digit Mobile Number"
+maxlength="10"
+pattern="[0-9]{10}"
+required
+oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+
+<button type="submit">Register</button>
+
+</form>
+
+<p id="message"></p>
+
+<div class="footer">
+Web Technology Laboratory
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("studentForm").addEventListener("submit",function(event){
+
+event.preventDefault();
+
+let name=document.getElementById("name").value.trim();
+let regno=document.getElementById("regno").value.trim();
+let dept=document.getElementById("department").value;
+let email=document.getElementById("email");
+let mobile=document.getElementById("mobile");
+let message=document.getElementById("message");
+
+if(name=="" || regno=="" || dept==""){
+message.innerHTML="❌ Please fill all the fields.";
+message.style.color="red";
+return;
+}
+
+if(!email.checkValidity()){
+message.innerHTML="❌ Please enter a valid Email Address.";
+message.style.color="red";
+email.focus();
+return;
+}
+
+if(!mobile.checkValidity()){
+message.innerHTML="❌ Mobile Number must contain exactly 10 digits.";
+message.style.color="red";
+mobile.focus();
+return;
+}
+
+message.innerHTML="✅ Student Registered Successfully!";
+message.style.color="green";
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Result Analysis System</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#F8F1E7,#F3E5D8,#EFE4D7,#FAF6F0);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.container{
+
+width:700px;
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0px 10px 25px rgba(0,0,0,0.2);
+
+}
+
+h1{
+
+text-align:center;
+color:#7A5C4D;
+margin-bottom:25px;
+
+}
+
+label{
+
+font-weight:bold;
+color:#6B4F4F;
+display:block;
+margin-top:15px;
+
+}
+
+input{
+
+width:100%;
+padding:12px;
+margin-top:8px;
+border:2px solid #D8C3B5;
+border-radius:10px;
+background:#FAF6F2;
+font-size:16px;
+
+}
+
+button{
+
+margin-top:25px;
+width:100%;
+padding:14px;
+background:linear-gradient(to right,#B08968,#A47551);
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:linear-gradient(to right,#9C6644,#7F5539);
+
+}
+
+.result{
+
+margin-top:25px;
+padding:20px;
+background:#FFF8F2;
+border-left:8px solid #B08968;
+border-radius:10px;
+line-height:2;
+font-size:17px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Student Result Analysis</h1>
+
+<label>Student Name</label>
+<input type="text" id="name" placeholder="Enter Student Name">
+
+<label>Marks (Enter 5 Subject Marks separated by commas)</label>
+<input type="text" id="marks" placeholder="Example : 85,90,78,88,95">
+
+<button onclick="analyzeResult()">
+Analyze Result
+</button>
+
+<div class="result" id="output"></div>
+
+</div>
+
+<script>
+
+function analyzeResult(){
+
+let name=document.getElementById("name").value;
+
+let marks=document.getElementById("marks").value
+.split(",")
+.map(Number);
+
+if(name=="" || marks.length!=5 || marks.some(isNaN))
+{
+
+document.getElementById("output").innerHTML=
+"<span style='color:red;'>Please enter valid details.</span>";
+
+return;
+
+}
+
+let total=0;
+
+for(let i=0;i<marks.length;i++)
+{
+
+total+=marks[i];
+
+}
+
+let average=(total/marks.length).toFixed(2);
+
+let highest=Math.max(...marks);
+
+let lowest=Math.min(...marks);
+
+let grade;
+
+if(average>=90)
+
+grade="A+";
+
+else if(average>=80)
+
+grade="A";
+
+else if(average>=70)
+
+grade="B";
+
+else if(average>=60)
+
+grade="C";
+
+else if(average>=50)
+
+grade="D";
+
+else
+
+grade="F";
+
+let status=(average>=50)?"PASS":"FAIL";
+
+let subjects=["Subject 1","Subject 2","Subject 3","Subject 4","Subject 5"];
+
+let result="<h3>Student Report</h3>";
+
+result+="<b>Name :</b> "+name+"<br><br>";
+
+result+="<b>Subject Marks</b><br>";
+
+for(let i=0;i<subjects.length;i++)
+{
+
+result+=subjects[i]+" : "+marks[i]+"<br>";
+
+}
+
+result+="<br>";
+
+result+="<b>Total Marks :</b> "+total+"<br>";
+
+result+="<b>Average :</b> "+average+"<br>";
+
+result+="<b>Highest Mark :</b> "+highest+"<br>";
+
+result+="<b>Lowest Mark :</b> "+lowest+"<br>";
+
+result+="<b>Grade :</b> "+grade+"<br>";
+
+result+="<b>Status :</b> "+status;
+
+document.getElementById("output").innerHTML=result;
+
+}
+
+</script>
+
+</body>
+</html>

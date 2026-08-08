@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ABC College</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            background:#eef7ff;
+        }
+
+        header{
+            background:#0077cc;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        nav{
+            background:#005fa3;
+            padding:15px;
+            text-align:center;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin:20px;
+            font-size:18px;
+            font-weight:bold;
+        }
+
+        nav a:hover{
+            color:yellow;
+        }
+
+        section{
+            width:85%;
+            margin:25px auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px gray;
+        }
+
+        h2{
+            color:#005fa3;
+        }
+
+        img{
+            display:block;
+            margin:auto;
+            border-radius:10px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            text-align:center;
+        }
+
+        table,th,td{
+            border:1px solid black;
+        }
+
+        th{
+            background:#4CAF50;
+            color:white;
+        }
+
+        th,td{
+            padding:10px;
+        }
+
+        input,select,textarea{
+            width:100%;
+            padding:8px;
+            margin:8px 0;
+        }
+
+        input[type=submit],input[type=reset]{
+            width:150px;
+            background:#0077cc;
+            color:white;
+            border:none;
+            cursor:pointer;
+        }
+
+        footer{
+            background:#0077cc;
+            color:white;
+            text-align:center;
+            padding:15px;
+            margin-top:20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+<h1>ABC COLLEGE</h1>
+<p>Knowledge | Innovation | Success</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#courses">Courses</a>
+<a href="#registration">Registration</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<section id="home">
+
+<h2>Home</h2>
+
+<img src="https://via.placeholder.com/700x250"
+width="700"
+height="250"
+alt="College Image">
+
+<p>
+Welcome to ABC College. We provide quality education, experienced faculty,
+modern laboratories, digital library and excellent placement opportunities.
+</p>
+
+</section>
+
+<section id="about">
+
+<h2>About Us</h2>
+
+<p>
+ABC College was established in 2005 with the vision of providing quality
+technical education and producing skilled professionals.
+</p>
+
+<h3>Facilities</h3>
+
+<ul>
+<li>Smart Classrooms</li>
+<li>Computer Laboratories</li>
+<li>Digital Library</li>
+<li>Sports Complex</li>
+<li>Wi-Fi Campus</li>
+<li>Hostel Facilities</li>
+</ul>
+
+</section>
+
+<section id="courses">
+
+<h2>Courses Offered</h2>
+
+<table>
+
+<tr>
+<th>Course</th>
+<th>Duration</th>
+<th>Eligibility</th>
+</tr>
+
+<tr>
+<td>B.Tech Information Technology</td>
+<td>4 Years</td>
+<td>12th Pass</td>
+</tr>
+
+<tr>
+<td>B.Tech Computer Science</td>
+<td>4 Years</td>
+<td>12th Pass</td>
+</tr>
+
+<tr>
+<td>B.Tech Electronics</td>
+<td>4 Years</td>
+<td>12th Pass</td>
+</tr>
+
+<tr>
+<td>B.Tech Mechanical</td>
+<td>4 Years</td>
+<td>12th Pass</td>
+</tr>
+
+</table>
+
+</section>
+
+<section id="registration">
+
+<h2>Student Registration Form</h2>
+
+<form>
+
+<label>Name</label>
+<input type="text" placeholder="Enter your Name">
+
+<label>Date of Birth</label>
+<input type="date">
+
+<label>Gender</label><br>
+
+<input type="radio" name="gender"> Male
+<input type="radio" name="gender"> Female
+
+<br><br>
+
+<label>Department</label>
+
+<select>
+<option>Information Technology</option>
+<option>Computer Science</option>
+<option>ECE</option>
+<option>EEE</option>
+<option>Mechanical</option>
+</select>
+
+<label>Email</label>
+<input type="email" placeholder="Enter Email">
+
+<label>Mobile Number</label>
+<input type="tel" placeholder="Enter Mobile Number">
+
+<label>Address</label>
+<textarea rows="4"></textarea>
+
+<label>Upload Photo</label>
+<input type="file">
+
+<br>
+
+<input type="checkbox">
+I hereby declare that the above information is true.
+
+<br><br>
+
+<input type="submit" value="Register">
+
+<input type="reset" value="Clear">
+
+</form>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact Us</h2>
+
+<p><b>ABC College</b></p>
+
+<p>123 College Road, Chennai, Tamil Nadu</p>
+
+<p>Email : info@abccollege.com</p>
+
+<p>Phone : +91 9876543210</p>
+
+<h3>Location</h3>
+
+<iframe
+src="https://www.google.com/maps?q=Chennai&output=embed"
+width="100%"
+height="350">
+</iframe>
+
+</section>
+
+<footer>
+
+© 2026 ABC College | All Rights Reserved
+
+</footer>
+
+</body>
+</html>
