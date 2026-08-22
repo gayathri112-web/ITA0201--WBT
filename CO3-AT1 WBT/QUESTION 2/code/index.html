@@ -1,0 +1,267 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student Result Processing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+
+            background: linear-gradient(135deg, #667eea, #764ba2);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #667eea;
+
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.25);
+        }
+
+        .marks-title {
+            margin-top: 25px;
+            margin-bottom: 15px;
+
+            color: #555;
+
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+
+            margin-top: 12px;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: linear-gradient(135deg, #667eea, #764ba2);
+
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 18px rgba(102, 126, 234, 0.35);
+        }
+
+        .footer {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #888;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="icon">🎓</div>
+
+            <h1>Student Result Processing</h1>
+
+            <p class="subtitle">
+                Enter student details and marks to calculate the result
+            </p>
+
+        </div>
+
+
+        <form action="StudentResultServlet" method="post">
+
+            <div class="form-group">
+                <label for="name">Student Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter student name"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="registerNumber">Register Number</label>
+
+                <input
+                    type="text"
+                    id="registerNumber"
+                    name="registerNumber"
+                    placeholder="Enter register number"
+                    required>
+            </div>
+
+
+            <div class="marks-title">
+                📚 Subject Marks
+            </div>
+
+
+            <div class="form-group">
+                <label for="mark1">Subject 1 Mark</label>
+
+                <input
+                    type="number"
+                    id="mark1"
+                    name="mark1"
+                    placeholder="Enter mark (0 - 100)"
+                    min="0"
+                    max="100"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="mark2">Subject 2 Mark</label>
+
+                <input
+                    type="number"
+                    id="mark2"
+                    name="mark2"
+                    placeholder="Enter mark (0 - 100)"
+                    min="0"
+                    max="100"
+                    required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="mark3">Subject 3 Mark</label>
+
+                <input
+                    type="number"
+                    id="mark3"
+                    name="mark3"
+                    placeholder="Enter mark (0 - 100)"
+                    min="0"
+                    max="100"
+                    required>
+            </div>
+
+
+            <input
+                type="submit"
+                value="Calculate Result">
+
+        </form>
+
+
+        <div class="footer">
+            Student Result Management System
+        </div>
+
+    </div>
+
+</body>
+</html>
+```

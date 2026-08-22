@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .heading h1 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #777;
+        }
+
+        .form-section {
+            background: #f5f7ff;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .form-section h2 {
+            color: #4b4b8f;
+            margin-top: 0;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .input-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102,126,234,0.4);
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #displayBtn {
+            background: #667eea;
+            color: white;
+        }
+
+        #displayBtn:hover {
+            background: #5568d8;
+        }
+
+        #clearBtn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        #clearBtn:hover {
+            background: #c0392b;
+        }
+
+        .preview-title {
+            margin-top: 35px;
+            color: #4b4b8f;
+        }
+
+        #profileArea {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .student-profile {
+            background: white;
+            border-radius: 15px;
+            padding: 22px;
+            border: 2px solid #667eea;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            animation: appear 0.4s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .student-profile h3 {
+            color: #667eea;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .student-profile p {
+            background: #f5f6fa;
+            padding: 10px;
+            border-radius: 7px;
+            margin: 8px 0;
+        }
+
+        .status {
+            text-align: center;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 8px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .removeStudent {
+            width: 100%;
+            margin-top: 15px;
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .removeStudent:hover {
+            background: #e74c3c;
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            border: 2px dashed #ccc;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 700px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            #profileArea {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="heading">
+        <h1>🎓 Student Registration System</h1>
+        <p>Register students and preview their profiles instantly</p>
+    </div>
+
+
+    <!-- FORM -->
+    <div class="form-section">
+
+        <h2>📝 Enter Student Details</h2>
+
+        <div class="form-row">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="Enter student name">
+            </div>
+
+            <div class="input-group">
+                <label>Register Number</label>
+                <input type="text" id="regno" placeholder="Enter register number">
+            </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="input-group">
+
+                <label>Department</label>
+
+                <select id="department">
+
+                    <option value="">Select Department</option>
+
+                    <option value="Information Technology">
+                        Information Technology (IT)
+                    </option>
+
+                    <option value="Computer Science Engineering">
+                        Computer Science Engineering (CSE)
+                    </option>
+
+                    <option value="Artificial Intelligence and Data Science">
+                        Artificial Intelligence and Data Science (AIDS)
+                    </option>
+
+                    <option value="Artificial Intelligence and Machine Learning">
+                        Artificial Intelligence and Machine Learning (AIML)
+                    </option>
+
+                    <option value="Electronics and Communication Engineering">
+                        Electronics and Communication Engineering (ECE)
+                    </option>
+
+                    <option value="Electrical and Electronics Engineering">
+                        Electrical and Electronics Engineering (EEE)
+                    </option>
+
+                    <option value="Mechanical Engineering">
+                        Mechanical Engineering (MECH)
+                    </option>
+
+                    <option value="Civil Engineering">
+                        Civil Engineering (CIVIL)
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Year of Study</label>
+
+                <select id="year">
+
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button id="displayBtn">
+                ✨ Add Student
+            </button>
+
+            <button id="clearBtn">
+                🗑 Clear All
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE AREA -->
+
+    <h2 class="preview-title">
+        👥 Registered Students
+    </h2>
+
+    <div id="profileArea">
+
+        <div class="empty-message" id="emptyMessage">
+            No students registered yet.
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Get button using DOM
+    const displayButton = document.getElementById("displayBtn");
+
+    const clearButton = document.getElementById("clearBtn");
+
+
+    // ADD STUDENT
+    displayButton.addEventListener("click", function () {
+
+        // Get input values using DOM
+        const name = document.getElementById("name").value;
+
+        const regno = document.getElementById("regno").value;
+
+        const department =
+            document.getElementById("department").value;
+
+        const year =
+            document.getElementById("year").value;
+
+
+        // Validate fields
+        if (
+            name === "" ||
+            regno === "" ||
+            department === "" ||
+            year === ""
+        ) {
+
+            alert("⚠ Please enter all student details.");
+
+            return;
+        }
+
+
+        // Get profile area
+        const profileArea =
+            document.getElementById("profileArea");
+
+
+        // Remove empty message
+        const emptyMessage =
+            document.getElementById("emptyMessage");
+
+        if (emptyMessage) {
+
+            emptyMessage.remove();
+
+        }
+
+
+        // Create profile dynamically
+        const profile =
+            document.createElement("div");
+
+
+        // Add CSS class using classList
+        profile.classList.add("student-profile");
+
+
+        // DOM STYLE manipulation
+        profile.style.borderColor = "#667eea";
+
+
+        // Create heading
+        const heading =
+            document.createElement("h3");
+
+        heading.textContent =
+            "🎓 Student Profile";
+
+
+        // Style heading using JavaScript
+        heading.style.color = "#667eea";
+
+
+        // Create name
+        const namePara =
+            document.createElement("p");
+
+        namePara.textContent =
+            "👤 Name: " + name;
+
+
+        // Create register number
+        const regPara =
+            document.createElement("p");
+
+        regPara.textContent =
+            "🆔 Register Number: " + regno;
+
+
+        // Create department
+        const deptPara =
+            document.createElement("p");
+
+        deptPara.textContent =
+            "🏫 Department: " + department;
+
+
+        // Create year
+        const yearPara =
+            document.createElement("p");
+
+        yearPara.textContent =
+            "📚 Year: " + year;
+
+
+        // Create status
+        const status =
+            document.createElement("div");
+
+        status.textContent =
+            "✓ Successfully Registered";
+
+        status.classList.add("status");
+
+
+        // Create remove button
+        const removeButton =
+            document.createElement("button");
+
+        removeButton.textContent =
+            "🗑 Remove Student";
+
+        removeButton.classList.add("removeStudent");
+
+
+        // Remove individual student
+        removeButton.addEventListener("click", function () {
+
+            profile.remove();
+
+            // If no profiles are left
+            if (profileArea.children.length === 0) {
+
+                const message =
+                    document.createElement("div");
+
+                message.classList.add("empty-message");
+
+                message.id = "emptyMessage";
+
+                message.textContent =
+                    "No students registered yet.";
+
+                profileArea.appendChild(message);
+            }
+
+        });
+
+
+        // Add all elements to profile
+        profile.appendChild(heading);
+
+        profile.appendChild(namePara);
+
+        profile.appendChild(regPara);
+
+        profile.appendChild(deptPara);
+
+        profile.appendChild(yearPara);
+
+        profile.appendChild(status);
+
+        profile.appendChild(removeButton);
+
+
+        // Add profile to webpage
+        profileArea.appendChild(profile);
+
+
+        // Clear input fields after adding
+        document.getElementById("name").value = "";
+
+        document.getElementById("regno").value = "";
+
+        document.getElementById("department").value = "";
+
+        document.getElementById("year").value = "";
+
+    });
+
+
+    // CLEAR ALL STUDENTS
+    clearButton.addEventListener("click", function () {
+
+        const profileArea =
+            document.getElementById("profileArea");
+
+
+        profileArea.textContent = "";
+
+
+        const message =
+            document.createElement("div");
+
+        message.classList.add("empty-message");
+
+        message.id = "emptyMessage";
+
+        message.textContent =
+            "No students registered yet.";
+
+        profileArea.appendChild(message);
+
+    });
+
+</script>
+
+</body>
+</html>
