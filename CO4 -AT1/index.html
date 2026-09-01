@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>University Course Enrollment Analysis</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f4f7fb;color:#172033}
+header{padding:38px 8%;background:#243b53;color:white}
+main{max-width:1100px;margin:30px auto;padding:0 20px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:white;padding:20px;border-radius:14px;box-shadow:0 5px 18px #0001}
+.card b{font-size:28px;display:block;margin-top:8px}
+table{width:100%;border-collapse:collapse;background:white;margin-top:25px}
+th,td{padding:14px;border-bottom:1px solid #ddd;text-align:left}
+th{background:#243b53;color:white}
+.badge{background:#e6eef7;padding:5px 10px;border-radius:12px}
+@media(max-width:800px){.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header><h1>University Course Enrollment Analysis</h1><p>Web Technology – Unit IV: Representing Web Data</p></header>
+<main>
+<div class="grid">
+<div class="card">Highest Enrollment<b>72</b><small>Artificial Intelligence</small></div>
+<div class="card">Lowest Enrollment<b>36</b><small>Web Technology Laboratory</small></div>
+<div class="card">Theory Courses<b>4</b><small>Out of 5 courses</small></div>
+<div class="card">TA Support<b>2</b><small>Courses above 60 students</small></div>
+</div>
+<table>
+<tr><th>Code</th><th>Course Name</th><th>Faculty</th><th>Students</th><th>Credits</th><th>Type</th></tr>
+<tr><td>AI302</td><td>Artificial Intelligence</td><td>Dr. Meena</td><td>72</td><td>4</td><td><span class="badge">Theory</span></td></tr>
+<tr><td>ML304</td><td>Machine Learning</td><td>Dr. Priya</td><td>64</td><td>4</td><td><span class="badge">Theory</span></td></tr>
+<tr><td>WEB301</td><td>Web Technology</td><td>Dr. Arun</td><td>58</td><td>4</td><td><span class="badge">Theory</span></td></tr>
+<tr><td>DB305</td><td>Database Systems</td><td>Dr. Kumar</td><td>42</td><td>3</td><td><span class="badge">Theory</span></td></tr>
+<tr><td>WEB303</td><td>Web Technology Laboratory</td><td>Dr. Ravi</td><td>36</td><td>2</td><td><span class="badge">Practical</span></td></tr>
+</table>
+<p><b>XSLT output:</b> Open <code>courses.xml</code> in a browser that supports XML/XSLT (or through Eclipse/server) to view the transformed “High Enrollment Courses” table.</p>
+</main>
+</body>
+</html>
