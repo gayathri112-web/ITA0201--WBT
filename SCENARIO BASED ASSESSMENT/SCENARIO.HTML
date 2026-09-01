@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riverbend University — Course Registration Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#182338;
+    --ink-soft:#2c3a56;
+    --paper:#faf8f3;
+    --paper-dim:#f1ede2;
+    --brick:#a4442e;
+    --brick-dark:#833522;
+    --brass:#8a7233;
+    --line:#d8d0bd;
+    --text:#2a2e35;
+    --text-dim:#5b6270;
+    --ok:#38623f;
+    --ok-bg:#e9f1e8;
+    --error:#a4442e;
+    --radius:2px;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Lora',serif;
+    color:var(--ink);
+    margin:0 0 .5em 0;
+    font-weight:600;
+  }
+  a{color:var(--brick);}
+  p{max-width:68ch;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* ---------- Header / Nav ---------- */
+  header.site{
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:4px solid var(--brick);
+  }
+  .site-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 0 14px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .crest{
+    display:flex; align-items:center; gap:14px;
+  }
+  .crest-mark{
+    width:46px;height:46px;flex:none;
+    border:2px solid var(--brass);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Lora',serif;
+    font-weight:700;
+    font-size:1.1rem;
+    color:var(--brass);
+  }
+  .crest-text h1{
+    color:var(--paper);
+    font-size:1.4rem;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  .crest-text span{
+    display:block;
+    font-size:.8rem;
+    color:#c7cede;
+  }
+  nav.primary{
+    background:var(--ink-soft);
+  }
+  nav.primary ul{
+    list-style:none;
+    display:flex;
+    gap:2px;
+    margin:0; padding:0;
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+    flex-wrap:wrap;
+  }
+  nav.primary a{
+    display:inline-block;
+    color:#e7e9f0;
+    text-decoration:none;
+    padding:13px 18px;
+    font-size:.94rem;
+    font-weight:500;
+    border-bottom:3px solid transparent;
+    transition:border-color .18s ease, background .18s ease;
+  }
+  nav.primary a:hover, nav.primary a:focus-visible{
+    border-bottom-color:var(--brick);
+    background:rgba(255,255,255,0.04);
+    outline:none;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(24,35,56,0.0), rgba(24,35,56,0.0)),
+      var(--paper-dim);
+    border-bottom:1px solid var(--line);
+    padding:56px 0 48px;
+  }
+  .hero-inner{
+    display:flex;
+    gap:40px;
+    align-items:flex-end;
+    flex-wrap:wrap;
+  }
+  .hero h2{
+    font-size:2.15rem;
+    max-width:14ch;
+    line-height:1.15;
+  }
+  .hero p{
+    color:var(--text-dim);
+    font-size:1.02rem;
+  }
+  .term-tag{
+    display:inline-block;
+    font-size:.78rem;
+    color:var(--brick-dark);
+    border:1px solid var(--brick-dark);
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:14px;
+  }
+  .hero-stats{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .hero-stats div{ min-width:120px; }
+  .hero-stats strong{
+    display:block;
+    font-family:'Lora',serif;
+    font-size:1.9rem;
+    color:var(--brick-dark);
+  }
+  .hero-stats span{
+    color:var(--text-dim);
+    font-size:.85rem;
+  }
+
+  /* ---------- Sections ---------- */
+  section{ padding:52px 0; }
+  section.alt{ background:var(--paper-dim); }
+  section > .wrap > h2{
+    font-size:1.6rem;
+    border-bottom:2px solid var(--line);
+    padding-bottom:12px;
+    margin-bottom:24px;
+  }
+  .section-lede{
+    color:var(--text-dim);
+    margin-top:-14px;
+    margin-bottom:26px;
+    max-width:62ch;
+  }
+
+  /* ---------- Course table ---------- */
+  .table-scroll{ overflow-x:auto; border:1px solid var(--line); }
+  table.courses{
+    width:100%;
+    border-collapse:collapse;
+    min-width:560px;
+    background:#fff;
+  }
+  table.courses caption{
+    text-align:left;
+    font-size:.85rem;
+    color:var(--text-dim);
+    padding:10px 14px;
+    background:var(--paper-dim);
+    border-bottom:1px solid var(--line);
+  }
+  table.courses th, table.courses td{
+    text-align:left;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line);
+    font-size:.94rem;
+  }
+  table.courses thead th{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Lora',serif;
+    font-weight:600;
+    font-size:.88rem;
+  }
+  table.courses tbody tr:nth-child(even){ background:#faf7f0; }
+  table.courses tbody tr:hover{ background:#f1e6de; }
+  .badge{
+    display:inline-block;
+    font-size:.72rem;
+    padding:2px 8px;
+    border-radius:20px;
+    font-weight:600;
+  }
+  .badge.core{ background:#e6ecf5; color:var(--ink-soft); }
+  .badge.elective{ background:#f3e8d6; color:var(--brass); }
+  .badge.lab{ background:var(--ok-bg); color:var(--ok); }
+
+  /* ---------- Two column: instructions + links ---------- */
+  .grid-2{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:36px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:22px 24px;
+  }
+  .card h3{ font-size:1.1rem; }
+  ol.steps{ margin:0; padding-left:1.2em; }
+  ol.steps li{ margin-bottom:8px; }
+  ul.plain{ list-style:none; margin:0; padding:0; }
+  ul.plain li{
+    padding:9px 0;
+    border-bottom:1px dashed var(--line);
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:.94rem;
+  }
+  ul.plain li:last-child{ border-bottom:none; }
+  ul.linklist{ list-style:none; margin:0; padding:0; }
+  ul.linklist li{ margin-bottom:10px; }
+  ul.linklist a{
+    text-decoration:none;
+    border-bottom:1px solid var(--brick);
+    padding-bottom:1px;
+  }
+  ul.linklist a:hover{ color:var(--brick-dark); border-bottom-width:2px; }
+
+  /* ---------- Form ---------- */
+  form.registration{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:30px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px 24px;
+  }
+  form.registration .field{ display:flex; flex-direction:column; gap:6px; }
+  form.registration .field.full{ grid-column:1 / -1; }
+  label{ font-size:.86rem; font-weight:600; color:var(--ink-soft); }
+  label .req{ color:var(--brick); }
+  input, select{
+    font-family:'Inter',sans-serif;
+    font-size:.96rem;
+    padding:10px 12px;
+    border:1px solid #c3bda9;
+    border-radius:var(--radius);
+    background:#fffdfa;
+    color:var(--text);
+  }
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--brick);
+    box-shadow:0 0 0 3px rgba(164,68,46,0.14);
+  }
+  fieldset{
+    border:1px solid var(--line);
+    padding:14px 16px 16px;
+    grid-column:1 / -1;
+  }
+  legend{ font-size:.86rem; font-weight:600; color:var(--ink-soft); padding:0 6px; }
+  .checkgroup{ display:flex; flex-wrap:wrap; gap:14px 24px; }
+  .checkgroup label{
+    font-weight:400; color:var(--text);
+    display:flex; align-items:center; gap:8px;
+    font-size:.92rem;
+  }
+  .field small.err{
+    color:var(--error);
+    font-size:.8rem;
+    min-height:1em;
+  }
+  .actions{
+    grid-column:1 / -1;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    margin-top:6px;
+  }
+  button{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:.95rem;
+    padding:12px 26px;
+    border:1px solid var(--brick-dark);
+    background:var(--brick);
+    color:#fff;
+    cursor:pointer;
+    border-radius:var(--radius);
+    transition:background .15s ease, transform .1s ease;
+  }
+  button:hover{ background:var(--brick-dark); }
+  button:active{ transform:translateY(1px); }
+  button.secondary{
+    background:transparent;
+    color:var(--ink-soft);
+    border-color:var(--line);
+  }
+  button.secondary:hover{ background:var(--paper-dim); }
+  #formStatus{ font-size:.9rem; }
+  #formStatus.error{ color:var(--error); }
+  #formStatus.ok{ color:var(--ok); }
+
+  /* ---------- Summary panel ---------- */
+  #summaryPanel{
+    margin-top:26px;
+    border:1px solid var(--ok);
+    background:var(--ok-bg);
+    padding:22px 26px;
+    display:none;
+  }
+  #summaryPanel.show{ display:block; }
+  #summaryPanel h3{ color:var(--ok); font-size:1.1rem; }
+  .summary-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+    gap:14px 24px;
+    margin:14px 0;
+  }
+  .summary-grid dt{ font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; color:var(--text-dim); }
+  .summary-grid dd{ margin:2px 0 0; font-weight:600; color:var(--ink); }
+  .summary-courses{ list-style:none; padding:0; margin:10px 0 0; }
+  .summary-courses li{
+    display:flex; justify-content:space-between;
+    padding:8px 0; border-bottom:1px dashed #bcd2bc;
+    font-size:.92rem;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  address{ font-style:normal; font-size:.94rem; color:var(--text-dim); }
+  address strong{ color:var(--ink); display:block; margin-bottom:4px; }
+
+  footer.site{
+    background:var(--ink);
+    color:#b9c1d4;
+    text-align:center;
+    padding:22px 0;
+    font-size:.85rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 780px){
+    .grid-2, form.registration, .contact-grid{ grid-template-columns:1fr; }
+    .hero-inner{ flex-direction:column; align-items:flex-start; }
+    .actions{ flex-direction:column; align-items:stretch; }
+    button{ width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap site-top">
+    <div class="crest">
+      <div class="crest-mark">RU</div>
+      <div class="crest-text">
+        <h1>Riverbend University</h1>
+        <span>Office of the Registrar</span>
+      </div>
+    </div>
+  </div>
+  <nav class="primary">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#registration">Registration</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="home">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="term-tag">Fall Term 2026 · Registration Open</span>
+        <h2>Course Registration Portal</h2>
+        <p>Review this term's course offerings, check eligibility, and submit
+        your registration in one sitting. Your selections are totalled
+        instantly — no page reloads, no waiting on a confirmation email.</p>
+      </div>
+      <div class="hero-stats">
+        <div><strong>5</strong><span>Courses open</span></div>
+        <div><strong>26</strong><span>Credits on offer</span></div>
+        <div><strong>Sep 12</strong><span>Registration closes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses">
+    <div class="wrap">
+      <h2>Available Courses</h2>
+      <p class="section-lede">Five courses are open for the Fall 2026 term. Confirm the credit
+      load and course type before adding a course to your registration below.</p>
+
+      <div class="table-scroll">
+        <table class="courses">
+          <caption>Fall 2026 · Department of Computer Science &amp; Engineering</caption>
+          <thead>
+            <tr>
+              <th scope="col">Course Code</th>
+              <th scope="col">Course Name</th>
+              <th scope="col">Credits</th>
+              <th scope="col">Course Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ITA02</td>
+              <td>Web Technology</td>
+              <td>4</td>
+              <td><span class="badge core">Core</span></td>
+            </tr>
+            <tr>
+              <td>CSA05</td>
+              <td>Data Structures &amp; Algorithms</td>
+              <td>4</td>
+              <td><span class="badge core">Core</span></td>
+            </tr>
+            <tr>
+              <td>CSE21</td>
+              <td>Database Management Systems</td>
+              <td>4</td>
+              <td><span class="badge core">Core</span></td>
+            </tr>
+            <tr>
+              <td>ITE14</td>
+              <td>Cloud Computing Fundamentals</td>
+              <td>3</td>
+              <td><span class="badge elective">Elective</span></td>
+            </tr>
+            <tr>
+              <td>CSL08</td>
+              <td>Web Technology Laboratory</td>
+              <td>1</td>
+              <td><span class="badge lab">Lab</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-top:34px;">
+        <div class="card">
+          <h3>How to register</h3>
+          <ol class="steps">
+            <li>Confirm your department and current semester with your advisor.</li>
+            <li>Check that prerequisite courses from the previous semester are cleared.</li>
+            <li>Select one or more courses below, keeping total credits within the 22-credit cap.</li>
+            <li>Fill in the registration form with your official register number and university email.</li>
+            <li>Review the generated summary carefully before your advisor countersigns it.</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Eligibility &amp; resources</h3>
+          <ul class="plain">
+            <li><span>Minimum attendance</span><strong>75%</strong></li>
+            <li><span>Maximum credits / term</span><strong>22</strong></li>
+            <li><span>Backlog courses allowed</span><strong>2</strong></li>
+          </ul>
+          <h3 style="margin-top:18px;">Useful links</h3>
+          <ul class="linklist">
+            <li><a href="#registration">Jump to the registration form</a></li>
+            <li><a href="https://www.ugc.gov.in" target="_blank" rel="noopener">UGC academic guidelines (external)</a></li>
+            <li><a href="mailto:registrar@riverbend.edu">Email the Registrar's office</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="registration">
+    <div class="wrap">
+      <h2>Student Registration</h2>
+      <p class="section-lede">Fields marked <span style="color:var(--brick); font-weight:600;">*</span> are required.
+      The form is checked in your browser before it is processed, and your summary appears below without reloading the page.</p>
+
+      <form class="registration" id="regForm" novalidate>
+        <div class="field">
+          <label for="regNo">Register Number <span class="req">*</span></label>
+          <input type="text" id="regNo" name="regNo" placeholder="e.g. 21ITR045" required>
+          <small class="err" id="err-regNo"></small>
+        </div>
+
+        <div class="field">
+          <label for="studentName">Student Name <span class="req">*</span></label>
+          <input type="text" id="studentName" name="studentName" placeholder="e.g. Ananya Rao" required>
+          <small class="err" id="err-studentName"></small>
+        </div>
+
+        <div class="field">
+          <label for="email">University Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="name@riverbend.edu" required>
+          <small class="err" id="err-email"></small>
+        </div>
+
+        <div class="field">
+          <label for="department">Department <span class="req">*</span></label>
+          <select id="department" name="department" required>
+            <option value="">Select department</option>
+            <option value="CSE">Computer Science &amp; Engineering</option>
+            <option value="IT">Information Technology</option>
+            <option value="ECE">Electronics &amp; Communication</option>
+            <option value="MECH">Mechanical Engineering</option>
+          </select>
+          <small class="err" id="err-department"></small>
+        </div>
+
+        <div class="field">
+          <label for="semester">Semester <span class="req">*</span></label>
+          <select id="semester" name="semester" required>
+            <option value="">Select semester</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+          <small class="err" id="err-semester"></small>
+        </div>
+
+        <fieldset>
+          <legend>Course Selection <span class="req">*</span> (choose at least one)</legend>
+          <div class="checkgroup" id="courseChecks">
+            <label><input type="checkbox" name="course" value="ITA02|Web Technology|4"> ITA02 — Web Technology (4 cr)</label>
+            <label><input type="checkbox" name="course" value="CSA05|Data Structures & Algorithms|4"> CSA05 — Data Structures &amp; Algorithms (4 cr)</label>
+            <label><input type="checkbox" name="course" value="CSE21|Database Management Systems|4"> CSE21 — Database Management Systems (4 cr)</label>
+            <label><input type="checkbox" name="course" value="ITE14|Cloud Computing Fundamentals|3"> ITE14 — Cloud Computing Fundamentals (3 cr)</label>
+            <label><input type="checkbox" name="course" value="CSL08|Web Technology Laboratory|1"> CSL08 — Web Technology Laboratory (1 cr)</label>
+          </div>
+          <small class="err" id="err-course"></small>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit">Submit registration</button>
+          <button type="reset" class="secondary" id="resetBtn">Clear form</button>
+          <span id="formStatus" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div id="summaryPanel" aria-live="polite">
+        <h3>Registration Summary</h3>
+        <dl class="summary-grid">
+          <div><dt>Student Name</dt><dd id="sumName">—</dd></div>
+          <div><dt>Register Number</dt><dd id="sumRegNo">—</dd></div>
+          <div><dt>Department</dt><dd id="sumDept">—</dd></div>
+          <div><dt>Semester</dt><dd id="sumSem">—</dd></div>
+          <div><dt>Total Courses</dt><dd id="sumCount">—</dd></div>
+          <div><dt>Total Credits</dt><dd id="sumCredits">—</dd></div>
+        </dl>
+        <strong style="font-size:.85rem; color:var(--ok);">Selected Courses</strong>
+        <ul class="summary-courses" id="sumCourseList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <address>
+          <strong>Office of the Registrar</strong>
+          Riverbend University<br>
+          4th Cross Street, Anna Nagar<br>
+          Chennai, Tamil Nadu 600040
+        </address>
+        <address>
+          <strong>Reach us</strong>
+          Phone: +91 44 2555 0192<br>
+          Email: <a href="mailto:registrar@riverbend.edu">registrar@riverbend.edu</a><br>
+          Hours: Mon–Fri, 9:00 AM – 5:00 PM
+        </address>
+        <address>
+          <strong>Quick links</strong>
+          <a href="#home">Back to top</a><br>
+          <a href="#courses">Course list</a><br>
+          <a href="#registration">Registration form</a>
+        </address>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">&copy; 2026 Riverbend University · Office of the Registrar</div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- Reusable data store for selected courses (array of objects) ----
+  // Each entry: { code, name, credits }
+  var selectedCourses = [];
+
+  var form = document.getElementById('regForm');
+  var status = document.getElementById('formStatus');
+
+  function setError(fieldId, message){
+    var el = document.getElementById('err-' + fieldId);
+    if(el){ el.textContent = message || ''; }
+  }
+
+  function clearAllErrors(){
+    ['regNo','studentName','email','department','semester','course'].forEach(function(id){
+      setError(id, '');
+    });
+  }
+
+  // ---- Validation helpers ----
+  function isValidEmail(value){
+    // simple, readable pattern: local@domain.tld
+    var pattern = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    return pattern.test(value);
+  }
+
+  function isValidSemester(value){
+    var n = Number(value);
+    return value !== '' && Number.isInteger(n) && n >= 1 && n <= 8;
+  }
+
+  // ---- Reusable function: builds selectedCourses[] from checked boxes ----
+  function collectSelectedCourses(){
+    var checks = document.querySelectorAll('input[name="course"]:checked');
+    var list = [];
+    checks.forEach(function(chk){
+      var parts = chk.value.split('|'); // code|name|credits
+      list.push({
+        code: parts[0],
+        name: parts[1],
+        credits: Number(parts[2])
+      });
+    });
+    return list;
+  }
+
+  // ---- Reusable function: totals (courses + credits) ----
+  function calculateTotals(courses){
+    var totalCourses = courses.length;
+    var totalCredits = courses.reduce(function(sum, c){ return sum + c.credits; }, 0);
+    return { totalCourses: totalCourses, totalCredits: totalCredits };
+  }
+
+  // ---- Render the summary panel dynamically (no reload) ----
+  function renderSummary(data){
+    document.getElementById('sumName').textContent = data.studentName;
+    document.getElementById('sumRegNo').textContent = data.regNo;
+    document.getElementById('sumDept').textContent = data.department;
+    document.getElementById('sumSem').textContent = data.semester;
+    document.getElementById('sumCount').textContent = data.totals.totalCourses;
+    document.getElementById('sumCredits').textContent = data.totals.totalCredits;
+
+    var listEl = document.getElementById('sumCourseList');
+    listEl.innerHTML = ''; // clear previous run
+    data.courses.forEach(function(c){
+      var li = document.createElement('li');
+      var left = document.createElement('span');
+      left.textContent = c.code + ' — ' + c.name;
+      var right = document.createElement('span');
+      right.textContent = c.credits + ' cr';
+      li.appendChild(left);
+      li.appendChild(right);
+      listEl.appendChild(li);
+    });
+
+    document.getElementById('summaryPanel').classList.add('show');
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    clearAllErrors();
+
+    var regNo = document.getElementById('regNo').value.trim();
+    var studentName = document.getElementById('studentName').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var department = document.getElementById('department').value;
+    var semester = document.getElementById('semester').value;
+
+    var valid = true;
+
+    if(regNo === ''){ setError('regNo', 'Register number is required.'); valid = false; }
+    if(studentName === ''){ setError('studentName', 'Student name is required.'); valid = false; }
+
+    if(email === ''){
+      setError('email', 'Email is required.'); valid = false;
+    } else if(!isValidEmail(email)){
+      setError('email', 'Enter a valid email address.'); valid = false;
+    }
+
+    if(department === ''){ setError('department', 'Please select a department.'); valid = false; }
+
+    if(semester === ''){
+      setError('semester', 'Please select a semester.'); valid = false;
+    } else if(!isValidSemester(semester)){
+      setError('semester', 'Semester must be between 1 and 8.'); valid = false;
+    }
+
+    selectedCourses = collectSelectedCourses();
+    if(selectedCourses.length === 0){
+      setError('course', 'Select at least one course.'); valid = false;
+    }
+
+    if(!valid){
+      status.textContent = 'Please fix the highlighted fields before submitting.';
+      status.className = 'error';
+      document.getElementById('summaryPanel').classList.remove('show');
+      // debugging aid: log the validation snapshot to console
+      console.log('Registration validation failed:', {
+        regNo: regNo, studentName: studentName, email: email,
+        department: department, semester: semester, selectedCourses: selectedCourses
+      });
+      return;
+    }
+
+    var totals = calculateTotals(selectedCourses);
+
+    var departmentNames = {
+      CSE: 'Computer Science & Engineering',
+      IT: 'Information Technology',
+      ECE: 'Electronics & Communication',
+      MECH: 'Mechanical Engineering'
+    };
+
+    renderSummary({
+      regNo: regNo,
+      studentName: studentName,
+      department: departmentNames[department] || department,
+      semester: 'Semester ' + semester,
+      courses: selectedCourses,
+      totals: totals
+    });
+
+    status.textContent = 'Registration submitted — see your summary below.';
+    status.className = 'ok';
+    console.log('Registration submitted successfully:', {
+      regNo: regNo, totals: totals, courses: selectedCourses
+    });
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    clearAllErrors();
+    status.textContent = '';
+    status.className = '';
+    document.getElementById('summaryPanel').classList.remove('show');
+    selectedCourses = [];
+  });
+
+})();
+</script>
+
+</body>
+</html>
